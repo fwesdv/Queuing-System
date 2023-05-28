@@ -12,7 +12,10 @@ import bell from '../../assets/icon/bell.png'
 import avata from '../../assets/avata.png'
 import { useParams } from 'react-router-dom'
 
-function VerticalMenu () {
+interface ipop{
+    content: String
+}
+function VerticalMenu ({content}:ipop) {
     
     return (
     <>
@@ -24,7 +27,7 @@ function VerticalMenu () {
             <div className="menu-main">
                 <div className="">
                     <img src={Dashboard} alt="" />
-                    <a href="#" className="active"> dashboard</a>
+                    <a href="#" className="active">Dashboard</a>
                 </div>
                 <div className="">
                     <img src={monitor} alt="" />
@@ -54,7 +57,7 @@ function VerticalMenu () {
             </div>
         </div>
         <div className="topnav">
-            <a href="#">Dashboard</a>
+            <a href="#">{content}</a>
             <div className="information">
                 <img src={bell} alt="" />
                 <div className="information_text">

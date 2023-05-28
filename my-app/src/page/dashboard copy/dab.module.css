@@ -1,0 +1,195 @@
+/* CSS cho đoạn mã JSX */
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  .col-xl-3,
+  .col-lg-6,
+  .col-sm-6 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .grid-margin {
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .text-dark {
+    color: #222;
+  }
+  
+  .font-weight-normal {
+    font-weight: normal;
+  }
+  
+  .font-weight-bold {
+    font-weight: bold;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 2rem;
+  }
+  
+  .px-4 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  svg {
+    display: none;
+  }
+  
+  .progress-order,
+  .progress-visitors,
+  .progress-impressions,
+  .progress-followers {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .progress-order,
+  .progress-visitors,
+  .progress-impressions,
+  .progress-followers {
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+    overflow: hidden;
+  }
+  
+  .progress-order div,
+  .progress-visitors div,
+  .progress-impressions div,
+  .progress-followers div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .mdi {
+    font-size: 30px;
+  }
+  
+  .icon-md {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  .mb-0 {
+    margin-bottom: 0;
+  }
+  
+  .font-weight-bold {
+    font-weight: bold;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .progress-order,
+  .progress-visitors,
+  .progress-impressions,
+  .progress-followers {
+    background-color: #f4f4f4;
+  }
+  
+  .progress-order .CircularProgressbar-path,
+  .progress-visitors .CircularProgressbar-path,
+  .progress-impressions .CircularProgressbar-path,
+  .progress-followers .CircularProgressbar-path {
+    stroke: url(#progress-order);
+  }
+  
+  .progress-order .CircularProgressbar-trail,
+  .progress-visitors .CircularProgressbar-trail,
+  .progress-impressions .CircularProgressbar-trail,
+  .progress-followers .CircularProgressbar-trail {
+    stroke: #e9ecef;
+  }
+  
+  .progress-order .CircularProgressbar-text,
+  .progress-visitors .CircularProgressbar-text,
+  .progress-impressions .CircularProgressbar-text,
+  .progress-followers .CircularProgressbar-text {
+    fill: #222;
+    font-size: 14px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+  
+  /* Định nghĩa gradient */
+  linearGradient {
+    x1: 0%;
+    y1: 0%;
+    x2: 100%;
+    y2: 0%;
+  }
+  
+  linearGradient stop:first-child {
+    stop-color: #1579ff;
+  }
+  
+  linearGradient stop:last-child {
+    stop-color: #7922e5;
+  }
+  
+  #progress-visitors stop:first-child {
+    stop-color: #b4ec51;
+  }
+  
+  #progress-visitors stop:last-child {
+    stop-color: #429321;
+  }
+  
+  #progress-impressions stop:first-child {
+    stop-color: #fad961;
+  }
+  
+  #progress-impressions stop:last-child {
+    stop-color: #f76b1c;
+  }
+  
+  #progress-followers stop:first-child {
+    stop-color: #f5515f;
+  }
+  
+  #progress-followers stop:last-child {
+    stop-color: #9f041b;
+  }
+  
