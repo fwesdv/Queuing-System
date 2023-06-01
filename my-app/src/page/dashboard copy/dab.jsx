@@ -4,7 +4,7 @@ import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 function Dashboard() {
   return (
     <>
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <div className={`${styles.col} ${styles['col-xl-3']} ${styles['col-lg-6']} ${styles['col-sm-6']} ${styles['grid-margin']} ${styles['stretch-card']}`}>
           <div className={styles.card}>
             <div className={styles['card-body']} text-center>
@@ -105,7 +105,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

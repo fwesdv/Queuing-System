@@ -27,23 +27,23 @@ function VerticalMenu ({content}:ipop) {
             <div className="menu-main">
                 <div className="">
                     <img src={Dashboard} alt="" />
-                    <a href="#" className="active">Dashboard</a>
+                    <a href="/dashboard" >Dashboard</a>
                 </div>
                 <div className="">
                     <img src={monitor} alt="" />
-                    <a href="#">Thiết bị</a>
+                    <a href="/device">Thiết bị</a>
                 </div>
                 <div className="">
                     <img src={DichVu} alt="" />
-                    <a href="#">Dịch vụ</a>
+                    <a href="/service">Dịch vụ</a>
                 </div>
                 <div className="">
                     <img src={capSo} alt="" />
-                    <a href="#">Cấp số</a>
+                    <a href="/queueNumber">Cấp số</a>
                 </div>
                 <div className="">
                     <img src={baoCao} alt="" />
-                    <a href="#">Báo cáo</a>
+                    <a href="/report">Báo cáo</a>
                 </div>
                 <div className="">
                     <img src={setting} alt="" />
