@@ -12,7 +12,7 @@
     color: #FF7506;
 
 }
-.addDevice{
+.editAccount{
     position: absolute;
     width: 1152px;
     height: 622px;
@@ -22,7 +22,7 @@
     flex-direction: column;
     justify-content: space-between
 }
-.addDevice_body{
+.editAccount_body{
     height: 550px;
     background: #ffffff;
     box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
@@ -32,7 +32,7 @@
     flex-direction: column;
     gap: 18px;
 }
-.addDevice_body>a{
+.editAccount_body>a{
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -41,7 +41,7 @@
     align-items: center;
     color: #7E7D88;
 }
-.device_footer{
+.editAccount_footer{
     height: 48px;
     width: 100%;
     display: flex;
@@ -49,7 +49,7 @@
     align-items: center;
     justify-content: center;
 }
-.device_footer>button{
+.editAccount_footer>button{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -71,7 +71,6 @@
     color: #FF7506;
 }
 .body_col{
-    height: 262px;
     width:100%;
     display: flex;
     justify-content: space-between;
@@ -83,14 +82,15 @@
     gap: 16px;
     flex-direction: column;
 }
-.last_input,
+
 .body_row{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.last_input>input,
+.input,
 .body_row>input{
+    
     height: 44px;
     background: #FFFFFF; 
     border: 1.5px solid #D4D4D7;
@@ -110,8 +110,21 @@
     font-size: 16px;
     line-height: 24px;
 }
-.item{
-    height: 49px;
+.gird_input{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}.input{
+    width:516px;
+    display: flex;
+    flex-direction: row;
+}
+.eye{
+    width: 22px;
+    height: 19px;
+    padding: 13px;
+    right: 10px;
+    position: absolute;
 }
 .item>div{  
 

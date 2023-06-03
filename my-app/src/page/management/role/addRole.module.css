@@ -12,7 +12,7 @@
     color: #FF7506;
 
 }
-.addDevice{
+.addService{
     position: absolute;
     width: 1152px;
     height: 622px;
@@ -22,17 +22,20 @@
     flex-direction: column;
     justify-content: space-between
 }
-.addDevice_body{
+.addService_body{
     height: 550px;
     background: #ffffff;
     box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
     border-radius: 16px;
-    padding:0 24px;
+}
+.addService_body>div{
+    
+    padding:16px 24px 0;
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
-.addDevice_body>a{
+.addService_body>div>a{
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -41,7 +44,7 @@
     align-items: center;
     color: #7E7D88;
 }
-.device_footer{
+.service_footer{
     height: 48px;
     width: 100%;
     display: flex;
@@ -49,7 +52,7 @@
     align-items: center;
     justify-content: center;
 }
-.device_footer>button{
+.service_footer>button{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -63,7 +66,6 @@
     border-color: #FF9138;
 }
 .body_title{
-    padding: 16px ;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -71,7 +73,6 @@
     color: #FF7506;
 }
 .body_col{
-    height: 262px;
     width:100%;
     display: flex;
     justify-content: space-between;
@@ -83,26 +84,40 @@
     gap: 16px;
     flex-direction: column;
 }
-.last_input,
+.body_right,
 .body_row{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.last_input>input,
+.type_input,
+.body_row>textarea,
 .body_row>input{
-    height: 44px;
+    height: 40px;
     background: #FFFFFF; 
     border: 1.5px solid #D4D4D7;
     border-radius: 8px;
     flex: none;
-    order: 1;
     flex-grow: 0;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     color: #A9A9B0;
-    padding-left: 20px;
+    padding-left: 10px;
+}
+.type_input{
+    width: 51px;
+}
+.type_checkbox{
+    width: 20px;
+    height: 20px;
+    background: #FFFFFF;
+    border: 1.5px solid #4277FF ;
+    border-radius: 4px;
+}
+.body_row>textarea{
+    resize:none;
+    height: 160px;
 }
 .body_row>label{
     font-style: normal;
@@ -110,12 +125,22 @@
     font-size: 16px;
     line-height: 24px;
 }
-.item{
-    height: 49px;
-}
-.item>div{  
-
-    background-color: #ffffff;
-    border: 1.5px solid #D4D4D7;
+.checkbox{
+    background: #FFF2E7;
     border-radius: 8px;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    grid-gap:20px;
+}
+.checkbox>div{
+    display: flex;
+    flex-direction: column;
+    grid-gap:10px;
+
+}
+.checkbox>div>div{
+    display: flex;
+    grid-gap:10px;
+    align-items: center;
 }

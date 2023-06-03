@@ -1,6 +1,20 @@
-.title{
+.body_title{
     width: 300px;
     height: 36px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FF7506;
+
+}
+.title{
+    position: absolute;
+    width: 300px;
+    height: 36px;
+    left: 224px;
+    top: 104px;
+
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -17,7 +31,8 @@
     background: #ffffff;
     box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
     border-radius: 16px;
-
+    
+    
 }
 .detailDevice>div{
     padding: 16px 24px;
@@ -37,13 +52,13 @@
     gap: 16px;
     flex-direction: column;
 }
-.last_input,
+
 .body_row{
     display: flex;
     flex-direction: row;
     gap: 8px;
 }
-.last_input>input,
+
 .body_row>input{
     height: 44px;
     background: #FFFFFF; 

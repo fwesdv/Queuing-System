@@ -16,6 +16,15 @@ import  userLogs from './page/management/userLogs/userLogs';
 import  addDevice from './page/device/addDevice';
 import  detailDevice from './page/device/detailDevice';
 import  updateDevice from './page/device/updateDevice ';
+import  addService from './page/service/addService';
+import  detailService from './page/service/detailService';
+import  editService from './page/service/editService';
+import  newNumber from './page/queueNumber/newNumber';
+import  detailQN from './page/queueNumber/detailQN';
+import  addRole from './page/management/role/addRole';
+import  addAccount from './page/management/account/addAccount';
+import  editRole from './page/management/role/editRole';
+import  editAccount from './page/management/account/editAccount';
 // import  dashboard1 from './page/dashboard copy/dab';
 function App() {
   return(
@@ -37,6 +46,15 @@ function App() {
           <Route path="/addDevice" Component={addDevice} />
           <Route path="/detailDevice" Component={detailDevice} />
           <Route path="/updateDevice" Component={updateDevice} />
+          <Route path="/addService" Component={addService} />
+          <Route path="/detailService" Component={detailService} />
+          <Route path="/editService" Component={editService} />
+          <Route path="/newNumber" Component={newNumber} />
+          <Route path="/detailQN" Component={detailQN} />
+          <Route path="/addRole" Component={addRole} />
+          <Route path="/addAccount" Component={addAccount} />
+          <Route path="/editRole" Component={editRole} />
+          <Route path="/editAccount" Component={editAccount} />
           {/* <Route path="/dashboard1" Component={dashboard1} /> */}
       </Routes>
     </BrowserRouter>

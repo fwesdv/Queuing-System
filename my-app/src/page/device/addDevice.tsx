@@ -1,9 +1,12 @@
 import VerticalMenu from '../../component/verticalMenu/verticalMenu';
 import styles from './addDevice.module.css';
-
+import ReactSelect from 'react-select';
   
 function Device() {
-
+    const options1 = [
+        { value: 'all', label: 'Kiosk' },
+        { value: 'activate', label: 'Display counter' },
+      ]
       
   return (
     <>
@@ -31,7 +34,7 @@ function Device() {
                     <div >
                         <div className={styles.body_row}>
                             <label htmlFor="username"><b>Loại thiết bị: *</b></label>
-                            <input type="text" placeholder="Chọn loại thiết bị" />
+                            <ReactSelect className={styles.item} options={options1} />
                         </div>
                         <div className={styles.body_row}>
                             <label htmlFor="username"><b>Tên đăng nhập: *</b></label>
