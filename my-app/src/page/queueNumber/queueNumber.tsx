@@ -102,10 +102,10 @@ function QueueNumber() {
     <>
         <VerticalMenu content={'Danh sách cấp số'}></VerticalMenu>
         <div className={styles.title}>Quản lý cấp số</div>
-        <div className={styles.addButon}>
+        <a href='/newNumber' className={styles.addButon}>
             <img src={add} alt="" />
             <p>Thêm <br /> số mới</p>
-        </div>
+        </a>
         <div className={styles.queueNumber}>
             <div className={styles.queueNumber_header}>
                 <div className={styles.filter}>

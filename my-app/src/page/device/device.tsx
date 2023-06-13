@@ -5,6 +5,7 @@ import { Column, useTable } from 'react-table';
 import ReactSelect from 'react-select';
 import search from '../../assets/icon/fi_search.png'
 import add from '../../assets/icon/add-square.png'
+import { Link } from 'react-router-dom';
 
 // Định nghĩa kiểu dữ liệu của đối tượng
 interface DataObject {
@@ -88,10 +89,11 @@ function Device() {
     <>
         <VerticalMenu content={'Thiết bị'}></VerticalMenu>
         <div className={styles.title}>Danh sách thiết bị</div>
-        <div className={styles.addButon}>
+        <a href='/addDevice' className={styles.addButon}>
             <img src={add} alt="" />
             <p>Thêm <br /> thiết bị</p>
-        </div>
+        </a>
+
         <div className={styles.device}>
             <div className={styles.device_header}>
                 <div className={styles.filter}>

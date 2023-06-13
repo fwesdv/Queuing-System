@@ -25,6 +25,8 @@ import  addRole from './page/management/role/addRole';
 import  addAccount from './page/management/account/addAccount';
 import  editRole from './page/management/role/editRole';
 import  editAccount from './page/management/account/editAccount';
+import  FormLogin from './page/test/FormLogin';
+
 // import  dashboard1 from './page/dashboard copy/dab';
 function App() {
   return(
@@ -55,6 +57,8 @@ function App() {
           <Route path="/addAccount" Component={addAccount} />
           <Route path="/editRole" Component={editRole} />
           <Route path="/editAccount" Component={editAccount} />
+          <Route path="/FormLogin" Component={FormLogin} />
+
           {/* <Route path="/dashboard1" Component={dashboard1} /> */}
       </Routes>
     </BrowserRouter>

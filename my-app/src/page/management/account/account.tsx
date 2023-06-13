@@ -84,10 +84,10 @@ function Account() {
     <>
         <VerticalMenu content={'Quản lý tài khoản'}></VerticalMenu>
         <div className={styles.title}>Danh sách tài khoản</div>
-        <div className={styles.addButon}>
+        <a href='/addAccount' className={styles.addButon}>
             <img src={add} alt="" />
             <p>Thêm <br /> dịch vụ</p>
-        </div>
+        </a>
         <div className={styles.account}>
             <div className={styles.account_header}>
                 <div className={styles.filter}>

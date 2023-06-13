@@ -45,11 +45,19 @@ function VerticalMenu ({content}:ipop) {
                     <img src={baoCao} alt="" />
                     <a href="/report">Báo cáo</a>
                 </div>
-                <div className="">
-                    <img src={setting} alt="" />
-                    <a href="#">Cài đặt hệ thống</a>
-                    <img src={moreVertical} alt="" />
+
+                <div className=" dropup">
+                        <img src={setting} alt="" />
+                        <a href="#">Cài đặt hệ thống</a>
+                        <img src={moreVertical} alt=""className="dropbtn" />
+
+                    <div className="dropup-content">
+                        <a href="/role">Quản lý vai trò</a>
+                        <a href="/account">Quản lý tài khoản</a>
+                        <a href="/userLogs">Nhật ký người dùng</a>
+                    </div>
                 </div>
+
                 <div className="">
                     <img src={log_out} alt="" />
                     <a href="#">Đăng xuất</a>

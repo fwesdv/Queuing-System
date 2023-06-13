@@ -76,9 +76,7 @@
     width: 22px;
     height: 19px;
     padding: 6px;
-    right: 10px;
-    bottom: 0;
-    position: absolute;
+    top: 0px !important;
 }
 .require_error {
     color: red;

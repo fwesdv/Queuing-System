@@ -99,6 +99,7 @@
     background: #FFF2E7;
     box-shadow: 0px 0px 6px #E7E9F2;
     border-radius: 8px 0px 0px 8px;
+    text-decoration: none;
 }
 .header_search>img{
     position: absolute;

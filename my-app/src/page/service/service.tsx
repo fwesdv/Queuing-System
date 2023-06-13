@@ -79,10 +79,10 @@ function Service() {
     <>
         <VerticalMenu content={'Quản lý dịch vụ'}></VerticalMenu>
         <div className={styles.title}>Quản lý dịch vụ</div>
-        <div className={styles.addButon}>
+        <a href="/addService" className={styles.addButon}>
             <img src={add} alt="" />
             <p>Thêm <br /> dịch vụ</p>
-        </div>
+        </a>
         <div className={styles.service}>
             <div className={styles.service_header}>
                 <div className={styles.filter}>

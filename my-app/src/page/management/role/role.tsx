@@ -68,10 +68,10 @@ function Role() {
     <>
         <VerticalMenu content={'Quản lý vai trò'}></VerticalMenu>
         <div className={styles.title}>Danh sách vai trò</div>
-        <div className={styles.addButon}>
+        <a href='/addRole' className={styles.addButon}>
             <img src={add} alt="" />
             <p>Thêm <br /> vai trò</p>
-        </div>
+        </a>
         <div className={styles.role}>
             <div className={styles.role_header}>
                 <div className={styles.header_search}>
