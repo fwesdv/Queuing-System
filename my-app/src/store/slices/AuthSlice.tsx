@@ -68,35 +68,35 @@ const saveAuthState = (state: DataState) => {
 export const login = createAsyncThunk(
   "auth/login",
   async (user: SignInData) => {
-    try {
-      const userCredential = await firebase
-        .auth()
-        .signInWithEmailAndPassword(user.email, user.password);
-      const userData = userCredential.user;
-      console.log(userCredential?.user);
-      if (userData) {
-        const accessToken = await userData.getIdToken();
-        const data = {
-          email: userData.email,
-          id: userData.uid,
-          name: userData.displayName,
-          image: userData.photoURL,
-          phoneNumber: userData.phoneNumber,
-          accessToken: accessToken,
-        } as SignInData;
-        saveAuthState({
-          ...initialState,
-          data: data,
-          authenticated: true,
-        });
-        return data;
-      } else {
-        throw new Error("User data is missing");
-      }
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    // try {
+    //   const userCredential = await firebase
+    //     .auth()
+    //     .signInWithEmailAndPassword(user.email, user.password);
+    //   const userData = userCredential.user;
+    //   console.log(userCredential?.user);
+    //   if (userData) {
+    //     const accessToken = await userData.getIdToken();
+    //     const data = {
+    //       email: userData.email,
+    //       id: userData.uid,
+    //       name: userData.displayName,
+    //       image: userData.photoURL,
+    //       phoneNumber: userData.phoneNumber,
+    //       accessToken: accessToken,
+    //     } as SignInData;
+    //     saveAuthState({
+    //       ...initialState,
+    //       data: data,
+    //       authenticated: true,
+    //     });
+    //     return data;
+    //   } else {
+    //     throw new Error("User data is missing");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //   throw error;
+    // }
   }
 );
 
@@ -170,7 +170,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.authenticated = true;
-        state.data = action.payload;
+        // state.data = action.payload;
         // state.data.push(action.payload);
       })
       .addCase(login.rejected, (state, action) => {

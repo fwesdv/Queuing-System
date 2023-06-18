@@ -1,51 +1,18 @@
 import VerticalMenu from '../../component/verticalMenu/verticalMenu';
 import styles from './service.module.css';
-import { Column, useTable } from 'react-table';
 import { DatePicker } from 'antd';
 import ReactSelect from 'react-select';
 import search from '../../assets/icon/fi_search.png'
 import add from '../../assets/icon/add-square.png'
 import arrow from '../../assets/icon/arrow-right.png'
-import { useState } from 'react';
-
-// Định nghĩa kiểu dữ liệu của đối tượng
-interface DataObject {
-    maDV :String;
-    tenDV:String;
-    moTa:String;
-    trangThaiHD:String;
-    link1:String;
-    link2:String;
-  }
-  
-  // Khai báo các cột với kiểu dữ liệu phù hợp
-  const columns: Column<DataObject>[] = [
-    {
-        Header: 'Mã dịch vụ',
-        accessor: 'maDV',
-    },
-    {
-        Header: 'Tên dịch vụ ',
-        accessor: 'tenDV',
-    },
-    {
-        Header: 'Mô tả',
-        accessor: 'moTa' ,
-    },
-    {
-        Header: 'Trạng thái hoạt động',
-        accessor: 'trangThaiHD' ,
-    },
-    {
-        Header: '',
-        accessor: 'link1' ,
-    },
-    {
-        Header: '',
-        accessor: 'link2' ,
-    },
-  ];
-  
+import { useEffect, useState } from 'react';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { service } from '../../type/Service';
+ 
 function Service() {
     const [StartDate, setStartDate] =useState(new Date());
     function onChangeDate(value:any){
@@ -56,25 +23,62 @@ function Service() {
         { value: 'activate', label: 'Hoạt động' },
         { value: 'shutDown', label: 'Ngưng hoạt động' }
       ]
-      const data = [
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: 'Mô tả dịch vụ 1', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maDV: 'KIO_01', tenDV: 'Kiosk', moTa: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', link1: 'Chi tiết', link2: 'Cập nhật' },
 
-      ];
-      const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-      } = useTable({ columns, data });
             
-      
+      const [Data, setData] = useState<service[]>([]);
+
+      useEffect(() => {
+          const fetchData = async () => {
+            try {
+              const db = getFirestore();
+              const colRef = collection(db, "service");
+              const docsSnap = await getDocs(colRef);
+        
+              const newData: service[] = [];
+              docsSnap.forEach(doc => {
+                newData.push(doc.data());
+                //console.log(doc.id)
+              });
+        
+              setData(prevData => [...prevData, ...newData]);
+            } catch (error) {
+              console.error('Error fetching Service:', error);
+            }
+          };
+          library.add(faCaretRight);
+          library.add(faCaretLeft);
+          fetchData();
+        }, []);
+        const navigate =useNavigate();  
+        const itemsPerPage = 9; // Số lượng mục trên mỗi trang
+        const totalPages = Math.ceil(Data.length / itemsPerPage); // Tổng số trang
+        console.log(Data.length)
+        const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+        const getItemsForCurrentPage = () => {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            return Data.slice(startIndex, endIndex);
+        };
+        const goToPage = (page:number) => {
+            setCurrentPage(page);
+          };
+          
+          const renderPagination = () => {
+            const pages = [];
+            for (let i = 1; i <= totalPages; i++) {
+              pages.push(
+                <button
+                  key={i}
+                  onClick={() => goToPage(i)}
+                  className={currentPage === i ? "active" : "btn-Service"}
+                  disabled={currentPage === i}
+                >
+                  {i}
+                </button>
+              );
+            }
+            return pages;
+          }; 
   return (
     <>
         <VerticalMenu content={'Quản lý dịch vụ'}></VerticalMenu>
@@ -111,35 +115,43 @@ function Service() {
 
             <div className={styles.service_body}>
                 <div className={styles.body_content}>
-                    <table {...getTableProps()} className={styles.table}>
+  
+                    <table  className={styles.table}>
                     <thead>
-                        {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                            ))}
+                      
+                        <tr>
+                            <th>Mã dịch vụ</th>
+                            <th >Tên dịch vụ </th>
+                            <th >Mô tả</th>
+                            <th >Trạng thái hoạt động</th>
+                            <th ></th>
+                            <th ></th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        {getItemsForCurrentPage().map((item, index) => (
+                            <tr key={index} className={styles.event}>
+                            <td>{item.MaDV}</td>
+                            <td>{item.Name}</td>
+                            <td>{item.describe}</td>
+                            <td>{item.Active}</td>                       
+                            <td > <a onClick={() => navigate(`/detailService/${item.ID}`)}>Chi tiết</a></td>
+                            <td><a onClick={() => navigate(`/editService/${item.ID}`)} >Cập nhật</a></td>
                         </tr>
                         ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {rows.map(row => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                            {row.cells.map(cell => (
-                                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                            ))}
-                            </tr>
-                        );
-                        })}
+
                     </tbody>
                     </table> 
                 </div>
                 
             </div>
             <div className={styles.service_footer}>
-                <b>1  2  3  4  5  ...  10</b>
+                <FontAwesomeIcon icon="caret-left" />
+                {renderPagination() }
+                <FontAwesomeIcon icon="caret-right" />
             </div>
+
         </div>
     </>
   );

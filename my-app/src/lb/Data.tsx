@@ -1,14 +1,9 @@
 import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
-import { db } from './firebase';
+
+import 'firebase/compat/firestore';
+import { db,app } from './firebase';
 
 
-
- const docRef=  collection(db,"your-collection");
- export const fetchDataFromFirebase = async () => {
-  const docSnap = await getDocs(docRef);
-  return docSnap.docs.map((doc) => doc.data());
-};
-export default fetchDataFromFirebase;
 
 export const fetchUsers = () => {
   return (dispatch: any) => {
@@ -29,3 +24,7 @@ export const fetchUsers = () => {
       });
   };
 };
+
+export const firestore =getFirestore(app)
+export const deviceCollection=collection(firestore,"device");
+export const serviceCollection=collection(firestore,"service");

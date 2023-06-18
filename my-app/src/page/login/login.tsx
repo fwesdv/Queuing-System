@@ -1,13 +1,12 @@
 import styles from './login.module.css';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useForm } from 'react-hook-form';
 import { login } from '../../store/slices/AuthSlice';
 import { useAppDispatch, useAppSelector } from '../../store/Hooks';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/store';
-
+import 'firebase/compat/auth';
 interface ILoginState {
   username: string;
   password: string;

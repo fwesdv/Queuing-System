@@ -5,56 +5,16 @@ import { Column, useTable } from 'react-table';
 import ReactSelect from 'react-select';
 import search from '../../assets/icon/fi_search.png'
 import add from '../../assets/icon/add-square.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { device } from '../../type/Device';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// Định nghĩa kiểu dữ liệu của đối tượng
-interface DataObject {
-    maTB :String;
-    tenTB:String;
-    diaChiIP:String;
-    trangThaiHD:String;
-    trangThaiKN:String;
-    dichVuSD:String;
-    link1:String;
-    link2:String;
-  }
   
-  // Khai báo các cột với kiểu dữ liệu phù hợp
-  const columns: Column<DataObject>[] = [
-    {
-        Header: 'Mã thiết bị',
-        accessor: 'maTB',
-    },
-    {
-        Header: 'Tên thiết bị',
-        accessor: 'tenTB',
-    },
-    {
-        Header: 'Địa chỉ IP',
-        accessor: 'diaChiIP' ,
-    },
-    {
-        Header: 'Trạng thái hoạt động',
-        accessor: 'trangThaiHD' ,
-    },
-    {
-        Header: 'Trạng thái kết nối',
-        accessor: 'trangThaiKN' ,
-    },
-    {
-        Header: 'Dịch vụ sử dụng',
-        accessor: 'dichVuSD' ,
-    },
-    {
-        Header: '',
-        accessor: 'link1' ,
-    },
-    {
-        Header: '',
-        accessor: 'link2' ,
-    },
-  ];
-  
+ 
 function Device() {
     const options1 = [
         { value: 'all', label: 'Tất cả' },
@@ -66,25 +26,62 @@ function Device() {
         { value: 'connected', label: 'Kết nối' },
         { value: 'disconnected', label: 'Mất kết nối' }
       ]
-      const data = [
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
-        { maTB: 'KIO_01', tenTB: 'Kiosk', diaChiIP: '192.168.1.10', trangThaiHD: 'Ngưng hoạt động', trangThaiKN: 'Mất kết nối', dichVuSD: 'Khám tim mạch, Khám mắt...', link1: 'Chi tiết', link2: 'Cập nhật' },
+      const [Data, setData] = useState<device[]>([]);
 
-      ];
-      const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-      } = useTable({ columns, data });
-            
-      
+      useEffect(() => {
+          const fetchData = async () => {
+            try {
+              const db = getFirestore();
+              const colRef = collection(db, "device");
+              const docsSnap = await getDocs(colRef);
+        
+              const newData: device[] = [];
+              docsSnap.forEach(doc => {
+                newData.push(doc.data());
+                //console.log(doc.id)
+              });
+        
+              setData(prevData => [...prevData, ...newData]);
+            } catch (error) {
+              console.error('Error fetching device:', error);
+            }
+          };
+          library.add(faCaretRight);
+          library.add(faCaretLeft);
+          fetchData();
+        }, []);
+        const navigate =useNavigate();  
+        const itemsPerPage = 9; // Số lượng mục trên mỗi trang
+        const totalPages = Math.ceil(Data.length / itemsPerPage); // Tổng số trang
+        console.log(Data.length)
+        const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+        const getItemsForCurrentPage = () => {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            return Data.slice(startIndex, endIndex);
+        };
+        const goToPage = (page:number) => {
+            setCurrentPage(page);
+          };
+          
+          const renderPagination = () => {
+            const pages = [];
+            for (let i = 1; i <= totalPages; i++) {
+              pages.push(
+                <button
+                  key={i}
+                  onClick={() => goToPage(i)}
+                  className={currentPage === i ? "active" : "btn-device"}
+                  disabled={currentPage === i}
+                >
+                  {i}
+                </button>
+              );
+            }
+            return pages;
+          };
+
+    
   return (
     <>
         <VerticalMenu content={'Thiết bị'}></VerticalMenu>
@@ -117,34 +114,44 @@ function Device() {
 
             <div className={styles.device_body}>
                 <div className={styles.body_content}>
-                    <table {...getTableProps()} className={styles.table}>
+                    <table  className={styles.table}>
                     <thead>
-                        {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                            ))}
+                      
+                        <tr>
+                            <th>Mã Thiết Bị</th>
+                            <th >Tên Thiết Bị</th>
+                            <th >Địa chỉ Ip</th>
+                            <th >Trạng Thái Hoạt Động</th>
+                            <th >Trạng Thái Kết Nối</th>
+                            <th >Dịch Vụ Sử Dụng</th>
+                            <th ></th>
+                            <th ></th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        {getItemsForCurrentPage().map((item, index) => (
+                            <tr key={index} className={styles.event}>
+                            <td>{item.MaTB}</td>
+                            <td>{item.Name}</td>
+                            <td>{item.IP}</td>
+                            <td>{item.Active}</td>
+                            <td>{item.Connect}</td>
+                            <td>{item.Service} </td>                         
+                            <td><a onClick={() => navigate(`/detailDevice/${item.ID}`)}>Chi tiết</a></td>
+                            <td><a onClick={() => navigate(`/updateDevice/${item.ID}`)} >Cập nhật</a></td>
                         </tr>
                         ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {rows.map(row => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                            {row.cells.map(cell => (
-                                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                            ))}
-                            </tr>
-                        );
-                        })}
+
                     </tbody>
                     </table> 
                 </div>
                 
             </div>
             <div className={styles.device_footer}>
-                <b>1  2  3  4  5  ...  10</b>
+                <FontAwesomeIcon icon="caret-left" />
+                {renderPagination() }
+                <FontAwesomeIcon icon="caret-right" />
             </div>
         </div>
     </>

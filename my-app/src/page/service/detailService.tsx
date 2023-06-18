@@ -7,7 +7,9 @@ import { DatePicker } from 'antd';
 import ReactSelect from 'react-select';
 import search from '../../assets/icon/fi_search.png'
 import arrow from '../../assets/icon/arrow-right.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 interface DataObject {
     STT :String;
     trangThaiHD:String;
@@ -25,6 +27,7 @@ interface DataObject {
         accessor: 'trangThaiHD' ,
     },
   ];
+  
   
 function DetailService() {
 
@@ -54,12 +57,47 @@ function DetailService() {
         rows,
         prepareRow,
       } = useTable({ columns, data });
+
+
+      const  ServiceId  =useParams().id;
+      const Serviceid= String(ServiceId)
+      console.log(Serviceid,"ServiceId")
+      const db = getFirestore();
+      useEffect(() => {
+        const fetchData = async () => {
+          const docRef = doc(db, 'service', Serviceid);
+          const docSnap = await getDoc(docRef);
+          const data = docSnap.data();
+          console.log(data,"ServiceId")
+          if (data) {
+            setMaDV(data.MaDV);
+              setName(data.Name);
+              setAutoIncrease(data.autoIncrease);
+              setDescribe(data.describe);
+              setPrefix(data.Prefix);
+              setSurfix(data.Surfix);
+              setReset(data.Reset);
+          }
+        };
+        fetchData();
+      }, [db]);
+
+
+
+      const [MaDV, setMaDV] = useState('');
+      const [describe, setDescribe] = useState('');
+      const [Name, setName] = useState('');
+      const [Prefix,setPrefix ] = useState(false);
+      const [Surfix, setSurfix] = useState(false);
+      const [Reset, setReset] = useState(false);
+      const [autoIncrease, setAutoIncrease] = useState(false);
+      console.log(Prefix,'Prefix');
   return (
     <>
         <VerticalMenu content={'Chi tiết'}></VerticalMenu>
         <div className={styles.addButon}>
             <img src={Edit} alt="" />
-            <p>Cập nhật <br /> thiết bị</p>
+            <p>Cập nhật <br /> dịch vụ</p>
         </div>
         <div className={styles.addButon1}>
             <img src={back} alt="" />
@@ -74,16 +112,16 @@ function DetailService() {
                 <div className={styles.body_col}>
                     <div >
                         <div className={styles.body_row}>
-                            <b >Mã thiết bị: </b>
-                            <a>KIO_01</a>
+                            <b >Mã dịch vụ: </b>
+                            <a>{MaDV}</a>
                         </div>
                         <div className={styles.body_row}>
-                            <b >Tên thiết bị: </b>
-                            <a>Kiosk</a>
+                            <b >Tên dịch vụ: </b>
+                            <a>{Name}</a>
                         </div>                     
                         <div className={styles.body_row}>
-                            <b >Địa chỉ IP:</b>
-                            <a>128.172.308</a>
+                            <b >Mô tả:</b>
+                            <a>{describe}</a>
                         </div>
                     </div>
                 </div>
@@ -91,22 +129,37 @@ function DetailService() {
                 <div className={styles.body_buttom}>
                     
                     <div className={styles.checkbox}>
-                        <div> 
+                        {autoIncrease&&(
+                            <div > 
                             <span>Tăng tự động từ:</span>
                             <input type="text" className={styles.type_input}  placeholder="0001" />
                             <span className={styles.text} >đến</span>
                             <input type="text" className={styles.type_input} placeholder="9999" />
                         </div>
-                        <div className="">
-                            <span>Prefix:</span>
-                            <input type="text" className={styles.type_input} placeholder="0001" />
-                        </div>
-                        <div className="">
-                            <span>Reset mỗi ngày</span>
-                        </div>
-                        <div className="">
-                            <span>Ví dụ: 201-2001</span>
-                        </div>
+                        )}
+                        
+                        {Prefix && (
+                            <div className="">
+                                <span>Prefix:</span>
+                                <input type="text" className={styles.type_input} placeholder="0001" />
+                            </div>
+                            )}
+                        {Surfix && (
+                            <div className="">
+                                <span>Surfix:</span>
+                                <input type="text" className={styles.type_input} placeholder="0001" />
+                            </div>
+                            )}
+                        {Reset&&(
+                            <>
+                                <div className="">
+                                    <span>Reset mỗi ngày</span>
+                                </div>
+                                <div className="">
+                                    <span>Ví dụ: 201-2001</span>
+                                </div>
+                            </>
+                            )}
                     </div>
                     
                 </div>

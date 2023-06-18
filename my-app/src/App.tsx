@@ -25,8 +25,8 @@ import  addRole from './page/management/role/addRole';
 import  addAccount from './page/management/account/addAccount';
 import  editRole from './page/management/role/editRole';
 import  editAccount from './page/management/account/editAccount';
-import  FormLogin from './page/test/FormLogin';
-
+import  Logintest from './page/test/Login';
+import  formAddDevice from './page/test/1/formAddDevice';
 // import  dashboard1 from './page/dashboard copy/dab';
 function App() {
   return(
@@ -46,19 +46,19 @@ function App() {
           <Route path="/account" Component={account} />
           <Route path="/userLogs" Component={userLogs} />
           <Route path="/addDevice" Component={addDevice} />
-          <Route path="/detailDevice" Component={detailDevice} />
-          <Route path="/updateDevice" Component={updateDevice} />
+          <Route path="/detailDevice/:id" Component={detailDevice} />
+          <Route path="/updateDevice/:id" Component={updateDevice} />
           <Route path="/addService" Component={addService} />
-          <Route path="/detailService" Component={detailService} />
-          <Route path="/editService" Component={editService} />
+          <Route path="/detailService/:id" Component={detailService} />
+          <Route path="/editService/:id" Component={editService} />
           <Route path="/newNumber" Component={newNumber} />
           <Route path="/detailQN" Component={detailQN} />
           <Route path="/addRole" Component={addRole} />
           <Route path="/addAccount" Component={addAccount} />
           <Route path="/editRole" Component={editRole} />
           <Route path="/editAccount" Component={editAccount} />
-          <Route path="/FormLogin" Component={FormLogin} />
-
+          <Route path="/Logintest" Component={Logintest} />
+          <Route path="/formAddDevice" Component={formAddDevice} />
           {/* <Route path="/dashboard1" Component={dashboard1} /> */}
       </Routes>
     </BrowserRouter>
